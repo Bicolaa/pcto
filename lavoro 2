@@ -1,0 +1,32 @@
+#include <stdio.h>
+#include <math.h>
+
+double calcolaRadice(double n) {
+    double x0 = n / 2; // stima iniziale
+    double x1 = (x0 + n / x0) / 2;
+
+    while (fabs(x1 - x0) >= 0.00001) {
+        x0 = x1;
+        x1 = (x0 + n / x0) / 2;
+    }
+
+    return x1;
+}
+
+int main() {
+    double numero;
+
+    printf("Inserisci un numero positivo: ");
+    scanf("%lf", &numero);
+
+    if (numero < 0) {
+        printf("Il numero inserito non è valido. Deve essere positivo.\n");
+        return 1;
+    }
+
+    double radice = calcolaRadice(numero);
+
+    printf("La radice quadrata di %.2lf è approssimativamente %.5lf\n", numero, radice);
+
+    return 0;
+}
