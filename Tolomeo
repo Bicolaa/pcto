@@ -1,0 +1,24 @@
+#include <stdio.h>
+#include <math.h>
+
+double tolomeo(double a, double b) {
+    return (a + b) / 2.0 - ((b - a) * (b - a)) / (8.0 * (a + b));
+}
+
+int main() {
+    double a, b, x;
+    
+    
+    printf("Inserisci la prima approssimazione: ");
+    scanf("%lf", &a);
+    printf("Inserisci la seconda approssimazione: ");
+    scanf("%lf", &b);
+    
+    
+    x = tolomeo(a, b);
+    
+    
+    printf("La radice approssimata è: %.6f\n", x);
+    
+    return 0;
+}
