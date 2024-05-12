@@ -2,7 +2,7 @@
 #include <math.h>
 
 double calcolaRadice(double n) {
-    double x0 = n / 2; // stima iniziale
+    double x0 = n / 2; 
     double x1 = (x0 + n / x0) / 2;
 
     while (fabs(x1 - x0) >= 0.00001) {
