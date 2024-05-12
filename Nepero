@@ -1,0 +1,32 @@
+#include <stdio.h>
+#include <math.h>
+
+double logaritmoNeperiano(double x) {
+    double epsilon = 1e-10; // Precisione desiderata
+    double result = 0.0;
+    double term = x - 1.0;
+    int i = 1;
+
+    while (fabs(term) > epsilon) {
+        result += term / i;
+        term *= -(x - 1.0);
+        term /= ++i;
+    }
+
+    return result;
+}
+
+int main() {
+    double x;
+    printf("Inserisci il valore di x per calcolare il logaritmo neperiano (ln(x)): ");
+    scanf("%lf", &x);
+
+    if (x <= 0) {
+        printf("Il valore di x deve essere maggiore di 0.\n");
+        return 1;
+    }
+
+    printf("Il logaritmo neperiano di %lf è: %lf\n", x, logaritmoNeperiano(x));
+
+    return 0;
+}
