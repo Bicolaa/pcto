@@ -1,0 +1,55 @@
+#include <stdio.h>
+#include <math.h>
+
+double log_base_10(double x) {
+   
+    const double ln_10 = 2.3;
+    const double ln_2 = 0.7;
+    const double epsilon = 1.0e-10;
+
+    
+    if (x <= 0) {
+        printf("Impossibile calcolare il logaritmo di un numero non positivo.\n");
+        return 0;
+    }
+
+    
+    if (x >= 10) {
+        int i = 0;
+        double result = 0;
+        while (x >= 10) {
+            x /= 10;
+            i++;
+        }
+        result = i * ln_10;
+        if (x != 1)
+            result += log_base_10(x);
+        return result;
+    }
+
+    
+    double y = (x - 1) / (x + 1);
+    double y_squared = y * y;
+    double result = 2 * y * (1 + y_squared * (1.0 / 3 + y_squared * (1.0 / 5 + y_squared * (1.0 / 7 + y_squared * (1.0 / 9 + y_squared * (1.0 / 11))))));
+
+    
+    int iterations = 0;
+    while (fabs(y) > epsilon && iterations < 100) {
+        y_squared = y * y;
+        result += 2 * pow(y, (2 * iterations) + 3) / ((2 * iterations) + 3);
+        y *= y_squared;
+        iterations++;
+    }
+
+    return result;
+}
+
+int main() {
+    double num;
+    printf("Inserisci il numero di cui vuoi calcolare il logaritmo in base 10: ");
+    scanf("%lf", &num);
+
+    printf("Il logaritmo in base 10 di %.2lf è: %.8lf\n", num, log_base_10(num));
+
+    return 0;
+}
