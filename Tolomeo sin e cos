@@ -1,0 +1,51 @@
+#include <stdio.h>
+#include <math.h>
+
+#define PI 3.14159265
+
+double tolo_seno(double x, int n) {
+    double result = 0;
+    for (int i = 0; i < n; ++i) {
+        result += (i % 2 == 0 ? 1 : -1) * pow(x, 2 * i + 1) / factorial(2 * i + 1);
+    }
+    return result;
+}
+
+double tolo_coseno(double x, int n) {
+    double result = 0;
+    for (int i = 0; i < n; ++i) {
+        result += (i % 2 == 0 ? 1 : -1) * pow(x, 2 * i) / factorial(2 * i);
+    }
+    return result;
+}
+
+int factorial(int n) {
+    int result = 1;
+    for (int i = 2; i <= n; ++i) {
+        result *= i;
+    }
+    return result;
+}
+
+int main() {
+    double angolo;
+    int n;
+    
+    printf("Inserisci l'angolo in gradi: ");
+    scanf("%lf", &angolo);
+    
+    printf("Inserisci il numero di termini della serie: ");
+    scanf("%d", &n);
+    
+    // Conversione da gradi a radianti
+    double angolo_rad = angolo * PI / 180.0;
+    
+    // Calcolo seno e coseno con il metodo di Tolomeo
+    double seno_tolo = tolo_seno(angolo_rad, n);
+    double coseno_tolo = tolo_coseno(angolo_rad, n);
+    
+    printf("Seno(%lf) = %lf\n", angolo, seno_tolo);
+    printf("Coseno(%lf) = %lf\n", angolo, coseno_tolo);
+    
+    return 0;
+}
